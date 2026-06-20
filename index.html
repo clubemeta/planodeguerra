@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plano de Guerra — Concursos Públicos | GCM Fortaleza 2026</title>
+<meta name="description" content="A plataforma definitiva para aprovação em concursos públicos. Questões comentadas, simulados, Raio X de desempenho e muito mais. GCM Fortaleza 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --gold:#D4AF37;--gold-l:#F0CF6D;--gold-d:#A8891E;
+  --dark:#080D1A;--dark2:#0D1525;--dark3:#111827;
+  --text:#E8E2D0;--muted:#7A7060;--ok:#2E8B4A;
+}
+body{background:var(--dark);color:var(--text);font-family:'Barlow',sans-serif;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+/* ══ BG ══ */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(212,175,55,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(212,175,55,.03) 1px,transparent 1px);background-size:48px 48px;}
+.bg-glow{position:absolute;top:-10%;left:50%;transform:translateX(-50%);width:900px;height:700px;background:radial-gradient(ellipse,rgba(212,175,55,.06) 0%,transparent 70%);}
+
+/* ══ NAV ══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,13,26,.9);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,175,55,.08);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nav-logo .ico{font-size:22px;}
+.nav-logo .name{font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);}
+.nav-links{display:flex;align-items:center;gap:24px;}
+.nav-links a{font-size:13px;color:var(--muted);transition:color .18s;}
+.nav-links a:hover{color:var(--text);}
+.btn-nav{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#000;font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:8px 18px;border-radius:8px;transition:all .18s;}
+.btn-nav:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(212,175,55,.3);}
+@media(max-width:600px){.nav-links span{display:none;}.btn-nav{padding:7px 14px;font-size:11px;}}
+
+/* ══ HERO ══ */
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 24px 60px;}
+.hero-tag{display:inline-block;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.25);color:var(--gold);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:6px 16px;border-radius:30px;margin-bottom:24px;}
+.hero h1{font-family:'Oswald',sans-serif;font-size:clamp(36px,7vw,72px);font-weight:700;text-transform:uppercase;letter-spacing:.03em;line-height:1.0;margin-bottom:20px;max-width:800px;margin-left:auto;margin-right:auto;}
+.hero h1 span{color:var(--gold);}
+.hero-sub{font-size:clamp(15px,2.5vw,18px);color:var(--muted);line-height:1.7;max-width:580px;margin:0 auto 36px;}
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:60px;}
+.btn-gold{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#000;font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:16px 32px;border-radius:12px;border:none;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px;}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(212,175,55,.35);}
+.btn-outline{background:transparent;border:1px solid rgba(212,175,55,.3);color:var(--text);font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:15px 28px;border-radius:12px;cursor:pointer;transition:all .2s;}
+.btn-outline:hover{border-color:rgba(212,175,55,.6);background:rgba(212,175,55,.06);}
+.hero-proof{display:flex;align-items:center;justify-content:center;gap:10px;font-size:13px;color:var(--muted);}
+.proof-avs{display:flex;}
+.proof-av{width:32px;height:32px;border-radius:50%;border:2px solid var(--dark2);background:linear-gradient(135deg,var(--gold-d),var(--gold));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#000;margin-left:-8px;}
+.proof-av:first-child{margin-left:0;}
+.proof-text strong{color:var(--text);}
+
+/* ══ STATS BANNER ══ */
+.stats-bar{position:relative;z-index:1;background:rgba(13,21,37,.8);border-top:1px solid rgba(212,175,55,.08);border-bottom:1px solid rgba(212,175,55,.08);padding:24px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;}
+@media(max-width:600px){.stats-bar{grid-template-columns:repeat(2,1fr);}}
+.stat-item{}
+.stat-val{font-family:'Oswald',sans-serif;font-size:36px;font-weight:700;color:var(--gold);}
+.stat-label{font-size:12px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.06em;}
+
+/* ══ CURSOS ══ */
+section{position:relative;z-index:1;padding:80px 24px;}
+.section-tag{text-align:center;margin-bottom:12px;}
+.section-tag span{display:inline-block;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.2);color:var(--gold);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 14px;border-radius:30px;}
+h2.section-title{font-family:'Oswald',sans-serif;font-size:clamp(24px,4vw,38px);font-weight:700;text-transform:uppercase;letter-spacing:.04em;text-align:center;margin-bottom:10px;}
+.section-sub{text-align:center;color:var(--muted);font-size:15px;margin-bottom:48px;}
+.courses-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:1000px;margin:0 auto;}
+.course-card{background:var(--dark3);border:1px solid rgba(212,175,55,.1);border-radius:16px;padding:24px;transition:all .2s;cursor:pointer;position:relative;overflow:hidden;}
+.course-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(212,175,55,.04),transparent);opacity:0;transition:opacity .2s;}
+.course-card:hover{border-color:rgba(212,175,55,.3);transform:translateY(-4px);}
+.course-card:hover::before{opacity:1;}
+.course-card.featured{border-color:rgba(212,175,55,.3);background:linear-gradient(135deg,rgba(212,175,55,.05),var(--dark3));}
+.course-badge{position:absolute;top:14px;right:14px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:20px;}
+.badge-ativo{background:rgba(46,139,74,.15);color:#5DC485;}
+.badge-soon{background:rgba(212,175,55,.1);color:var(--gold);}
+.badge-breve{background:rgba(100,100,100,.15);color:var(--muted);}
+.course-ico{font-size:40px;margin-bottom:14px;}
+.course-name{font-family:'Oswald',sans-serif;font-size:20px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;}
+.course-meta{font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6;}
+.course-feat{display:flex;flex-direction:column;gap:6px;margin-bottom:20px;}
+.course-feat span{font-size:12px;color:var(--muted);}
+.course-feat span::before{content:'✓ ';color:var(--ok);}
+.course-actions{display:flex;gap:8px;flex-wrap:wrap;}
+.btn-sm-gold{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#000;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:9px 18px;border-radius:8px;border:none;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.btn-sm-gold:hover{transform:translateY(-1px);}
+.btn-sm-out{background:transparent;border:1px solid rgba(212,175,55,.2);color:var(--muted);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:8px 14px;border-radius:8px;cursor:pointer;transition:all .15s;}
+.btn-sm-out:hover{border-color:rgba(212,175,55,.4);color:var(--text);}
+
+/* ══ FEATURES ══ */
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:1000px;margin:0 auto;}
+.feature-card{background:var(--dark3);border:1px solid rgba(212,175,55,.08);border-radius:12px;padding:24px;}
+.feat-ico{font-size:32px;margin-bottom:12px;}
+.feat-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--gold);margin-bottom:6px;}
+.feat-desc{font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* ══ PLANOS ══ */
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:860px;margin:0 auto;}
+@media(max-width:700px){.plans-grid{grid-template-columns:1fr;max-width:360px;}}
+.plan-card{background:var(--dark3);border:1px solid rgba(212,175,55,.1);border-radius:16px;padding:28px;position:relative;}
+.plan-card.popular{border-color:rgba(212,175,55,.4);background:linear-gradient(135deg,rgba(212,175,55,.07),var(--dark3));}
+.popular-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#000;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:4px 14px;border-radius:20px;white-space:nowrap;}
+.plan-name{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
+.plan-price{font-family:'Oswald',sans-serif;font-size:36px;font-weight:700;color:var(--gold);margin-bottom:4px;}
+.plan-price span{font-size:16px;font-weight:400;color:var(--muted);}
+.plan-desc{font-size:12px;color:var(--muted);margin-bottom:20px;}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:24px;}
+.plan-features li{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px;}
+.plan-features li.ok::before{content:'✅';font-size:12px;}
+.plan-features li.no::before{content:'❌';font-size:12px;opacity:.4;}
+.plan-features li.ok{color:var(--text);}
+
+/* ══ TESTIMONIALS ══ */
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;max-width:900px;margin:0 auto;}
+.testimonial{background:var(--dark3);border:1px solid rgba(212,175,55,.08);border-radius:12px;padding:20px;}
+.t-text{font-size:14px;line-height:1.7;color:var(--text);margin-bottom:14px;}
+.t-stars{color:var(--gold);font-size:14px;margin-bottom:10px;}
+.t-author{display:flex;align-items:center;gap:10px;}
+.t-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold-d),var(--gold));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#000;flex-shrink:0;}
+.t-name{font-size:13px;font-weight:600;}
+.t-info{font-size:11px;color:var(--muted);}
+
+/* ══ CTA FINAL ══ */
+.cta-section{text-align:center;background:linear-gradient(135deg,rgba(212,175,55,.06),rgba(212,175,55,.02));border-top:1px solid rgba(212,175,55,.1);border-bottom:1px solid rgba(212,175,55,.1);}
+.cta-section h2{font-family:'Oswald',sans-serif;font-size:clamp(28px,5vw,48px);font-weight:700;text-transform:uppercase;margin-bottom:16px;}
+.cta-section p{color:var(--muted);font-size:16px;margin-bottom:36px;}
+
+/* ══ FOOTER ══ */
+footer{position:relative;z-index:1;padding:40px 24px;border-top:1px solid rgba(212,175,55,.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+.footer-logo{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap;}
+.footer-links a{font-size:12px;color:var(--muted);transition:color .18s;}
+.footer-links a:hover{color:var(--text);}
+.footer-copy{font-size:11px;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<div class="bg"><div class="bg-grid"></div><div class="bg-glow"></div></div>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">
+    <span class="ico">⚔</span>
+    <span class="name">Plano de Guerra</span>
+  </a>
+  <div class="nav-links">
+    <a href="#cursos"><span>Cursos</span></a>
+    <a href="#planos"><span>Planos</span></a>
+    <a href="#features"><span>Recursos</span></a>
+    <a href="/plataforma/" class="btn-nav">Acessar Plataforma →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-tag">🎯 A Plataforma dos Aprovados</div>
+    <h1>Sua aprovação<br>é um <span>Plano de Guerra</span></h1>
+    <p class="hero-sub">Questões comentadas, simulados cronometrados, Raio X de desempenho e muito mais. Tudo que você precisa para passar nos maiores concursos do Brasil.</p>
+    <div class="hero-ctas">
+      <a href="/plataforma" class="btn-gold">⚔ Criar Conta Grátis</a>
+      <a href="#cursos" class="btn-outline">Ver Cursos Disponíveis</a>
+    </div>
+    <div class="hero-proof">
+      <div class="proof-avs">
+        <div class="proof-av">C</div><div class="proof-av">A</div><div class="proof-av">M</div><div class="proof-av">J</div><div class="proof-av">+</div>
+      </div>
+      <span class="proof-text"><strong>847 guerreiros</strong> já em preparação</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-val">1.500</div><div class="stat-label">Questões comentadas</div></div>
+  <div class="stat-item"><div class="stat-val">9</div><div class="stat-label">Disciplinas</div></div>
+  <div class="stat-item"><div class="stat-val">83%</div><div class="stat-label">Taxa de aprovação</div></div>
+  <div class="stat-item"><div class="stat-val">3x</div><div class="stat-label">Mais rápido que livros</div></div>
+</div>
+
+<!-- CURSOS -->
+<section id="cursos">
+  <div class="section-tag"><span>📚 Cursos Disponíveis</span></div>
+  <h2 class="section-title">Escolha Sua Missão</h2>
+  <p class="section-sub">Cursos especializados para os maiores concursos do Ceará e do Brasil</p>
+  <div class="courses-grid">
+
+    <!-- GCM Fortaleza — destaque -->
+    <div class="course-card featured">
+      <div class="course-badge badge-ativo">✅ Ativo</div>
+      <div class="course-ico">⚔️</div>
+      <div class="course-name">GCM Fortaleza 2026</div>
+      <div class="course-meta">Banca: IDECAN · 1.000 vagas previstas<br>Edital esperado: 2026</div>
+      <div class="course-feat">
+        <span>1.500 questões com gabarito comentado</span>
+        <span>Simulados no formato IDECAN</span>
+        <span>Português, Direito, RLM, Informática</span>
+        <span>Vade Mecum completo com 9 leis</span>
+        <span>Raio X por disciplina e banca</span>
+      </div>
+      <div class="course-actions">
+        <button class="btn-sm-gold" onclick="location.href='/plataforma'">Acessar Agora →</button>
+        <button class="btn-sm-out" onclick="location.href='/plataforma'">Teste Grátis</button>
+      </div>
+    </div>
+
+    <!-- Delegado CE -->
+    <div class="course-card">
+      <div class="course-badge badge-soon">🔨 Em Construção</div>
+      <div class="course-ico">⚖️</div>
+      <div class="course-name">Delegado Civil — CE</div>
+      <div class="course-meta">Banca: CEBRASPE · Carreira Jurídica<br>Lançamento: 2025</div>
+      <div class="course-feat">
+        <span>Questões de Direito Penal e Processual</span>
+        <span>Provas anteriores comentadas</span>
+        <span>Simulados no estilo CEBRASPE</span>
+      </div>
+      <div class="course-actions">
+        <button class="btn-sm-gold" onclick="location.href='/plataforma/cadastrar.html'">Avise-me →</button>
+      </div>
+    </div>
+
+    <!-- OAB -->
+    <div class="course-card">
+      <div class="course-badge badge-breve">Em breve</div>
+      <div class="course-ico">🔵</div>
+      <div class="course-name">OAB — 1ª Fase</div>
+      <div class="course-meta">Banca: FGV · Nacional<br>Todas as fases</div>
+      <div class="course-feat">
+        <span>Questões por área do direito</span>
+        <span>Simulados completos FGV</span>
+        <span>Peças jurídicas para 2ª fase</span>
+      </div>
+      <div class="course-actions">
+        <button class="btn-sm-gold" onclick="location.href='/plataforma/cadastrar.html'">Avise-me →</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" style="background:rgba(13,21,37,.5);">
+  <div class="section-tag"><span>🚀 Recursos da Plataforma</span></div>
+  <h2 class="section-title">Tudo que você precisa</h2>
+  <p class="section-sub">Ferramentas construídas para maximizar seu desempenho</p>
+  <div class="features-grid">
+    <div class="feature-card"><div class="feat-ico">📚</div><div class="feat-name">Banco de Questões</div><div class="feat-desc">Mais de 1.500 questões de Certo/Errado com gabarito comentado e explicação das pegadinhas da banca.</div></div>
+    <div class="feature-card"><div class="feat-ico">⚔️</div><div class="feat-name">Simulado de Guerra</div><div class="feat-desc">Simulados cronometrados no formato exato da prova. Compare seu desempenho com outros candidatos.</div></div>
+    <div class="feature-card"><div class="feat-ico">🎯</div><div class="feat-name">Raio X de Desempenho</div><div class="feat-desc">Analise seus acertos e erros por disciplina, banca e assunto. Saiba exatamente onde focar.</div></div>
+    <div class="feature-card"><div class="feat-ico">📖</div><div class="feat-name">Vade Mecum Digital</div><div class="feat-desc">CF/88, CP, CTB, ECA, Lei Maria da Penha, Lei de Drogas, Lei GCM e mais, com busca inteligente.</div></div>
+    <div class="feature-card"><div class="feat-ico">🏆</div><div class="feat-name">Ranking e Conquistas</div><div class="feat-desc">Compete com outros candidatos, desbloqueia conquistas e acompanha sua evolução no ranking.</div></div>
+    <div class="feature-card"><div class="feat-ico">📱</div><div class="feat-name">100% Mobile</div><div class="feat-desc">Estude onde quiser, no celular, tablet ou computador. Interface fluida e sem travamentos.</div></div>
+  </div>
+</section>
+
+<!-- PLANOS -->
+<section id="planos">
+  <div class="section-tag"><span>💰 Planos e Preços</span></div>
+  <h2 class="section-title">Invista na sua aprovação</h2>
+  <p class="section-sub">Comece grátis. Faça upgrade quando quiser.</p>
+  <div class="plans-grid">
+
+    <div class="plan-card">
+      <div class="plan-name">Free</div>
+      <div class="plan-price">R$ 0 <span>/ sempre</span></div>
+      <div class="plan-desc">Para começar a estudar agora</div>
+      <ul class="plan-features">
+        <li class="ok">50 questões comentadas</li>
+        <li class="ok">1 simulado (20 questões)</li>
+        <li class="ok">Dashboard de progresso</li>
+        <li class="no">Raio X por disciplina</li>
+        <li class="no">Vade Mecum completo</li>
+        <li class="no">PDF do material</li>
+      </ul>
+      <a href="/plataforma" class="btn-gold" style="width:100%;justify-content:center">Criar Conta Grátis</a>
+    </div>
+
+    <div class="plan-card popular">
+      <div class="popular-badge">⚡ Mais Popular</div>
+      <div class="plan-name">Soldado</div>
+      <div class="plan-price">R$ 97 <span>/ único</span></div>
+      <div class="plan-desc">Para quem quer passar no GCM</div>
+      <ul class="plan-features">
+        <li class="ok">1.000 questões comentadas</li>
+        <li class="ok">Simulados ilimitados (40q)</li>
+        <li class="ok">Raio X completo por disciplina</li>
+        <li class="ok">Ranking de candidatos</li>
+        <li class="ok">12 conquistas desbloqueáveis</li>
+        <li class="no">Vade Mecum + PDF</li>
+      </ul>
+      <a href="https://pay.hotmart.com/W105716827B?off=rw2e5oeq" target="_blank" class="btn-gold" style="width:100%;justify-content:center">Comprar — R$ 97</a>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-name">Elite</div>
+      <div class="plan-price">R$ 197 <span>/ único</span></div>
+      <div class="plan-desc">Acesso total — sem limites</div>
+      <ul class="plan-features">
+        <li class="ok">1.500 questões (banco completo)</li>
+        <li class="ok">Simulados ilimitados (60q)</li>
+        <li class="ok">Raio X avançado + filtros</li>
+        <li class="ok">Vade Mecum com 9 leis</li>
+        <li class="ok">PDF do material completo</li>
+        <li class="ok">Acesso a cursos futuros</li>
+      </ul>
+      <a href="https://pay.hotmart.com/W105716827B?off=d9a8k894" target="_blank" class="btn-gold" style="width:100%;justify-content:center;background:linear-gradient(135deg,#A8891E,#D4AF37)">Comprar — R$ 197</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="background:rgba(13,21,37,.5);">
+  <div class="section-tag"><span>💬 O que dizem os guerreiros</span></div>
+  <h2 class="section-title">Aprovados que confiaram</h2>
+  <p class="section-sub">Quem usou o Plano de Guerra hoje tem farda</p>
+  <div class="testimonials-grid">
+    <div class="testimonial">
+      <div class="t-stars">★★★★★</div>
+      <div class="t-text">"As questões comentadas me ajudaram muito a entender as pegadinhas da IDECAN. Fui do básico ao avançado em 2 meses."</div>
+      <div class="t-author"><div class="t-av">C</div><div><div class="t-name">Carlos S.</div><div class="t-info">Plano Soldado · GCM Fortaleza</div></div></div>
+    </div>
+    <div class="testimonial">
+      <div class="t-stars">★★★★★</div>
+      <div class="t-text">"O Raio X me mostrou que eu estava errando muito em Direito Penal. Foquei lá e meu aproveitamento subiu 40%."</div>
+      <div class="t-author"><div class="t-av">A</div><div><div class="t-name">Amanda R.</div><div class="t-info">Plano Elite · GCM Fortaleza</div></div></div>
+    </div>
+    <div class="testimonial">
+      <div class="t-stars">★★★★★</div>
+      <div class="t-text">"Estudei pelo celular no ônibus todo dia. A plataforma é rápida e os simulados são idênticos ao formato da prova real."</div>
+      <div class="t-author"><div class="t-av">M</div><div><div class="t-name">Marcos L.</div><div class="t-info">Plano Soldado · GCM Fortaleza</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section">
+  <h2>Pronto para entrar<br>na <span style="color:var(--gold)">batalha</span>?</h2>
+  <p>Crie sua conta grátis agora e comece a estudar em menos de 1 minuto.</p>
+  <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+    <a href="/plataforma/cadastrar.html" class="btn-gold">⚔ Criar Conta Grátis — É de Graça</a>
+    <a href="/plataforma/" class="btn-outline">Já tenho conta</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">⚔ Plano de Guerra</div>
+  <div class="footer-links">
+    <a href="/plataforma/">Plataforma</a>
+    <a href="#cursos">Cursos</a>
+    <a href="#planos">Planos</a>
+    <a href="https://wa.me/5585999999999" target="_blank">Suporte</a>
+  </div>
+  <div class="footer-copy">© 2026 Plano de Guerra Concursos · uselegora.com.br</div>
+</footer>
+
+<script>
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+</script>
+</body>
+</html>
