@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Debug Questões</title>
+<style>
+  body { font-family: monospace; background: #0a0f1e; color: #ccc; padding: 20px; }
+  h2 { color: #D4AF37; }
+  .ok  { color: #4ade80; }
+  .err { color: #f87171; }
+  .warn{ color: #facc15; }
+  pre  { background: #111827; padding: 12px; border-radius: 8px; overflow-x: auto; font-size: 12px; white-space: pre-wrap; }
+  button { background: #D4AF37; color: #000; border: none; padding: 10px 24px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px; margin: 4px; }
+</style>
+</head>
+<body>
+<h2>⚔️ Debug — Questões Plano de Guerra</h2>
+<p style="color:#888">Abra este arquivo dentro da pasta <code>/plataforma/</code> do servidor.<br>
+Ex: <code>https://uselegora.com.br/plataforma/debug_questoes.html</code></p>
+
+<button onclick="runAll()">▶ Rodar Todos os Testes</button>
+<button onclick="document.getElementById('log').innerHTML=''">Limpar</button>
+<pre id="log">Clique em "Rodar Todos os Testes"...</pre>
+
+<script>
+const log = document.getElementById('log');
+const API = '/plataforma/api';
+
+function print(msg, type=''){
+  const cls = type==='ok'?'ok':type==='err'?'err':type==='warn'?'warn':'';
+  log.innerHTML += `<span class="${cls}">${msg}</span>\n`;
+}
+
+async function runAll(){
+  log.innerHTML = '';
+  print('══════════════════════════════════════════', 'warn');
+  print(' DIAGNÓSTICO — ' + new Date().toLocaleTimeString(), 'warn');
+  print('══════════════════════════════════════════', 'warn');
+
+  // 1. Token no localStorage
+  print('\n[1] TOKEN NO LOCALSTORAGE');
+  let token = null;
+  try {
+    const sess = localStorage.getItem('gcm_sess');
+    const tok  = localStorage.getItem('gcm_api_token');
+    print('  gcm_sess    = ' + (sess ? JSON.parse(sess)?.plan + ' / ' + JSON.parse(sess)?.name : 'vazio'));
+    print('  gcm_api_token = ' + (tok ? tok.substring(0,20)+'...' : 'vazio'));
+    token = tok;
+  } catch(e) { print('  ERRO: ' + e.message, 'err'); }
+
+  // 2. Testar auth/me
+  print('\n[2] AUTH/ME (token válido?)');
+  try {
+    const r = await fetch(API + '/auth.php?action=me', {
+      headers: token ? {Authorization: 'Bearer '+token} : {}
+    });
+    const txt = await r.text();
+    print('  HTTP ' + r.status);
+    try {
+      const d = JSON.parse(txt);
+      if(d.plan) print('  ✅ Usuário: ' + d.name + ' | Plano: ' + d.plan + ' | Role: ' + d.role, 'ok');
+      else print('  ❌ ' + JSON.stringify(d), 'err');
+    } catch(e) { print('  Resposta raw: ' + txt.substring(0,200), 'err'); }
+  } catch(e) { print('  ERRO fetch: ' + e.message, 'err'); }
+
+  // 3. Testar questions.php?action=diagnose
+  print('\n[3] DIAGNÓSTICO DE ARQUIVOS JSON');
+  try {
+    const r = await fetch(API + '/questions.php?action=diagnose');
+    const d = await r.json();
+    print('  HTTP ' + r.status);
+    print('  Status: ' + d.status, d.status==='OK'?'ok':'err');
+    print('  Loaded: ' + d.loaded + ' questões');
+    (d.files||[]).forEach(f => print('  📄 ' + f.file + ' — ' + f.count + ' questões (' + f.size + ')', 'ok'));
+  } catch(e) { print('  ERRO: ' + e.message, 'err'); }
+
+  // 4. Testar questions.php?action=list COM token
+  print('\n[4] QUESTIONS LIST (com token)');
+  try {
+    const r = await fetch(API + '/questions.php?action=list', {
+      headers: token ? {Authorization: 'Bearer '+token} : {}
+    });
+    const txt = await r.text();
+    print('  HTTP ' + r.status);
+    try {
+      const d = JSON.parse(txt);
+      if(d.questions) {
+        print('  ✅ ' + d.questions.length + ' questões retornadas | plano: ' + d.plan + ' | limit: ' + d.limit, 'ok');
+        print('  Primeira: [' + d.questions[0]?.id + '] ' + (d.questions[0]?.enunciado||'').substring(0,60));
+      } else {
+        print('  ❌ ' + JSON.stringify(d).substring(0,300), 'err');
+      }
+    } catch(e) { print('  Resposta raw: ' + txt.substring(0,300), 'err'); }
+  } catch(e) { print('  ERRO fetch: ' + e.message, 'err'); }
+
+  // 5. Testar questions.php?action=public&plan=elite
+  print('\n[5] QUESTIONS PUBLIC (sem token, plano elite)');
+  try {
+    const r = await fetch(API + '/questions.php?action=public&plan=elite');
+    const d = await r.json();
+    print('  HTTP ' + r.status);
+    if(d.questions) print('  ✅ ' + d.questions.length + ' questões | plano: ' + d.plan, 'ok');
+    else print('  ❌ ' + JSON.stringify(d).substring(0,200), 'err');
+  } catch(e) { print('  ERRO: ' + e.message, 'err'); }
+
+  // 6. Testar fetch direto do JSON
+  print('\n[6] FETCH DIRETO DO questoes.json');
+  try {
+    const r = await fetch(API + '/questoes.json');
+    print('  HTTP ' + r.status);
+    if(r.ok){
+      const raw = await r.json();
+      print('  ✅ ' + raw.length + ' questões no arquivo', 'ok');
+    } else {
+      print('  ❌ HTTP ' + r.status + ' — arquivo não acessível via fetch', 'err');
+    }
+  } catch(e) { print('  ERRO: ' + e.message, 'err'); }
+
+  print('\n══════════════════════════════════════════');
+  print(' FIM DO DIAGNÓSTICO');
+  print('══════════════════════════════════════════');
+}
+</script>
+</body>
+</html>
